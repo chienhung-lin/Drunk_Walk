@@ -57,12 +57,8 @@ bool InputRowCol(unsigned int *Row, unsigned int *Col, unsigned int *Y, unsigned
 		    fprintf(stderr,"Error Input, ([Row],[Col])=([2:40],[2:20])\n");
         else if( ( *Y < 0 || *Y > *Row ) || ( *X < 0 || *X > *Col) )
             fprintf(stderr,"X or Y out of the range of Rol or Col\n");
-        else{
-            //test
-            //printf("Row: %u, Col: %u, X: %u, Y: %u\n", *Row, *Col, *X, *Y);
-            //test
+        else
             return true;
-        }
     }
 }
 
@@ -74,9 +70,6 @@ unsigned int** CreateMap(unsigned int *Row, unsigned int *Col){
     for(unsigned int j = 0 ; j < (*Row) ; ++j ){
         map[j] = longMap + j*(*Col) ;
     }
-    //test
-    //printf("successfully create map\n");
-    //test
     return map;
 }
 
@@ -84,9 +77,6 @@ unsigned int** FreeMap(unsigned int **map){
     free(*map);
     free(map);
     return map;
-    //test free
-    //printf("successfully free map\n");
-    //test
 }
 
 void InitMap(unsigned int **map, unsigned int *Row, unsigned int *Col, unsigned int *Y, unsigned int *X){
@@ -94,21 +84,6 @@ void InitMap(unsigned int **map, unsigned int *Row, unsigned int *Col, unsigned 
         for( unsigned int Cindex = 0 ; Cindex < (*Col) ; ++Cindex )
             map[Rindex][Cindex] = 0;
     map[*Y][*X] = 1;
-
-    //test map content
-    /*
-    printf("    ");
-    for(unsigned int i = 0 ; i < *Col ; ++i)
-        printf(" C%2u",i);
-    printf("\n");
-    for(unsigned int j = 0 ; j < *Row ; ++j){
-        printf("R%2u",j);
-        for(unsigned int i = 0 ; i < *Col ; ++i)
-            printf("%4u",map[j][i]);
-        printf("\n");
-    }
-    */
-    //printf("successfully inital map\n");
 }
 
 void RandomWalk(unsigned int **map, unsigned int *moveStep, unsigned int *Row, unsigned int *Col, unsigned int *Y, unsigned int *X){
@@ -124,19 +99,6 @@ void RandomWalk(unsigned int **map, unsigned int *moveStep, unsigned int *Row, u
 
     srand(time(NULL));
   
-    /*
-    for(unsigned int i = 0 ; i < *Col ; ++i)
-        printf(" C%2u",i);
-    printf("\n");
-    for(unsigned int j = 0 ; j < *Row ; ++j){
-        printf("R%2u",j);
-        for(unsigned int i = 0 ; i < *Col ; ++i)
-            printf("%4u",map[j][i]);
-        printf("\n");
-    }
-    */
-
-    
     for(;(noZero!=0) && ((*moveStep+1)<=50000);){
         itmpt = ibug + imove[(unsigned int)(rand()/(RAND_MAX+1.0)*8.0)];
         jtmpt = jbug + jmove[(unsigned int)(rand()/(RAND_MAX+1.0)*8.0)];
@@ -164,11 +126,6 @@ void OutPutResult(unsigned int **map, unsigned int *moveStep, unsigned int *Row,
         printf("\n");
     }
 
-    /*
-    for(unsigned int j = 0 ; j < *Row ; ++j)
-        for(unsigned int i = 0 ; i < *Col ; ++i)
-            printf("%2u-%2u: %u\n",j,i,map[j][i]);
-    */
     printf("\nRow:%u, Col:%u, Y:%u, X:%u\n",*Row,*Col,*Y,*X);
     printf("Total Move Step: %u\n",*moveStep);
 }
