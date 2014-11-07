@@ -44,18 +44,18 @@ bool InputRowCol(unsigned int *Row, unsigned int *Col, unsigned int *Y, unsigned
 
     while(1){
         printf("\nPlease Enter the dimension of map\n"
-                    "(input format:[Row] [Col] [X] [Y]),\n"
-                    "(Range:Rol->(2:40], Col->[2:20], X->[0,Col), Y->[0.Row))\n"
+                    "(input format:[Row] [Col] [Y] [X]),\n"
+                    "(Range:Rol->(2:40], Col->[2:20], Y->[0,Row), X->[0.Col))\n"
                     "(exit input: 0 0 0 0)\n"
                     ": ");
         scanf("%u %u %u %u",Row,Col,Y,X);
-        if( *Row == 0 && *Col == 0 && *X == 0 && *Y == 0){
+        if( *Row == 0 && *Col == 0 && *Y == 0 && *X == 0){
             printf("exit file\n");
             return false;
         }
         else if( (*Row <= 2 || *Row > 40) || (*Col < 2 || *Col > 20) )
 		    fprintf(stderr,"Error Input, ([Row],[Col])=([2:40],[2:20])\n");
-        else if( ( *Y < 0 || *Y > *Row ) || ( *X < 0 || *X > *Col) )
+        else if( ( *Y < 0 || *Y >= *Row ) || ( *X < 0 || *X >= *Col) )
             fprintf(stderr,"X or Y out of the range of Rol or Col\n");
         else
             return true;
@@ -92,7 +92,7 @@ void RandomWalk(unsigned int **map, unsigned int *moveStep, unsigned int *Row, u
     unsigned int jbug = *Y;
     unsigned int itmpt = 0, jtmpt = 0;
     unsigned int noZero = (*Row) * (*Col) - 1 ;
-    int imove[8] = {-1, 0, 1, 1, 1, 0,-1, 1};
+    int imove[8] = {-1, 0, 1, 1, 1, 0,-1,-1};
     int jmove[8] = { 1, 1, 1, 0,-1,-1,-1, 0};
 
     (*moveStep) = 0;
